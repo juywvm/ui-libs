@@ -1,0 +1,9 @@
+local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/juywvm/ui-libs/main/Akali_Notify_Library/AkaliNotifyLibrary"))();
+
+local Notify = AkaliNotif.Notify;
+
+Notify({
+    Description = "  DESCRIPTION BLA BLA BLA  ";
+    Title = " TITLE BLA BLA BLA";
+    Duration = 5;
+    });
