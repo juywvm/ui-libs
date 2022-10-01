@@ -15,7 +15,7 @@ local NotificationLibrary = TurtleNotifications.new(false, 2)
 Load A Plugin.
 
 -- Args:
---  1: URL: URL of the plugins code i.e. "raw.githubusercontent.com/Turtle-Brand/Turtle-Notifications/main/pluginexample.lua"
+--  1: URL: URL of the plugins code i.e. "https://raw.githubusercontent.com/juywvm/ui-libs/main/TurtleNotifLib/pluginexample.lua"
 
 
 -- Load the example plugin from the Turtle Notifications repo
