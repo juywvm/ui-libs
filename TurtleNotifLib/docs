@@ -1,0 +1,129 @@
+▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+Initiate The Library:
+
+local TurtleNotifications = loadstring(game:HttpGet("https://raw.githubusercontent.com/juywvm/ui-libs/main/TurtleNotifLib/Source.lua"))()
+
+-- Args
+-- 1: DestroyOld: If the library already has a exsisting instance then it will destroy the old Gui and Make a new one. If false then will return the old instance (if it exsists)
+
+-- 2: TimeBetweenNotifications: The Time Between Notifications
+
+local NotificationLibrary = TurtleNotifications.new(false, 2)
+
+▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+
+Load A Plugin.
+
+-- Args:
+--  1: URL: URL of the plugins code i.e. "raw.githubusercontent.com/Turtle-Brand/Turtle-Notifications/main/pluginexample.lua"
+
+
+-- Load the example plugin from the Turtle Notifications repo
+local Plugin = NotificationLibrary:LoadPlugin("raw.githubusercontent.com/Turtle-Brand/Turtle-Notifications/main/pluginexample.lua")
+
+-- Call one of the plugins functions. Dont call a plugin function if it starts with and _ Because that means its a plugins internal function (You can call it if you know what you're doing, of course)
+Plugin:HelloWorld()
+
+
+▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+
+Queue Up A Notification.
+
+-- Args:
+--  1: WaitTime: The time to wait until the Notification goes away, if 0 then it will not go away until user interacts
+
+--  2: Title: Title of the Notification
+
+--  3: Description: Description of the Notification (Description just being a the text under the title)
+
+--  4: Type: Type of Notification. The only two type as of now is "Cancel-Continue" and "Ok" these pick which buttons apear, If it is Ok then the Ok Button will be visible. If  Cancel-Continue then the Cancel and Continue buttons will be visible.
+
+--  5: Callbacks: In the form of a Dictionary, i.e. if you have type as "Cancel-Continue" Then you make a Table with the Callbacks formated like this {Cancel = function() 
+--   print("Cancel Pressed")
+--  end, Continue = function()
+--   print("Continue Pressed")
+--  end} 
+--  and if the type is "Ok" then it would look like {Ok = function()
+--   print("Ok Pressed")
+--  end}
+
+-- 6: ?Positions: Optional arg that lets you pick where the notification will start and end. i.e. {
+--    Start = UDim2.new(0.7, 0, 1, 0),
+--    End = UDim2.new(0.7, 0, 0.8, 0)
+--} This will make the Notification goto the End and then Tween To The Start and then Tween To The End. So the end should be off screen, and the Start should be where you want the user to look to see the Notification
+
+NotificationLibrary:QueueNotification(5, "Test Title", "Example Text!", "Ok", {Ok = function() 
+    print("Ok Pressed!")
+end})
+
+
+
+▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+
+Make A Popup. One cool thing you can do with this is instead of using :PopupOnMouse to have it on the mouse, You can have it popup on the Gui button the user pressed itself, maybe making it centered or something like that. It just allows more design choices
+
+-- Args:
+--  1: Position: Position of the popup as a UDim2
+
+--  2: Buttons: A table of Buttons to be in the popup in the form of a Dictonary i.e. {{
+--      Text = "Example",
+--      Callback = function()
+--          print("Example Pressed")
+--      end
+--  }, {
+--      Text = "Example 2",
+--      Callback = function()
+--            print("Example 2 Pressed")
+--      end
+--  }} 
+
+NotificationLibrary:Popup(UDim2.new(0.5, 0, 0.5, 0), {{
+    Text = "Test Button",
+    Callback = function()
+        print("Test Button Pressed")
+    end
+}})
+
+▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+
+
+Set Notification Delay.
+
+-- Args
+-- 1: Delay: The Delay Between Queued Notifications
+
+NotificationLibrary:SetNotificationDelay(5)
+
+▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+
+
+
+Make A Popup On The Mouse.
+
+-- Args
+-- 1: Buttons: A table of Buttons to be in the popup in the form of a Dictonary i.e. {{
+--      Text = "Example",
+--      Callback = function()
+--          print("Example Pressed")
+--      end
+--  }, {
+--      Text = "Example 2",
+--      Callback = function()
+--            print("Example 2 Pressed")
+--      end
+--  }} 
+
+NotificationLibrary:PopupAtMouse({{
+    Text = "Test Button",
+    Callback = function()
+        print("Test Button Pressed")
+    end
+}})
+
+
+
+▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+
+
+
+
