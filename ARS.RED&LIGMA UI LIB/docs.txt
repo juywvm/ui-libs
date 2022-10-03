@@ -1,0 +1,661 @@
+original docs from: https://unixian.gitbook.io/ligma-ui-library/  (this is backup)
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Beginning
+
+How to use the Ligma UI Library (created by Liga#0001)
+
+⚠️ THIS UI LIBRARY IS ONLY SUPPORTED ON SYNAPSE X ⚠️
+
+Using the library
+
+To use the library, you define a local with a way of getting the library. This can be done by getting the script from a remote source or from a local copy.
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Loading library from remote source
+
+
+
+local library = loadstring(syn.request({
+    Method = "GET",
+    Url = "https://raw.githubusercontent.com/juywvm/ui-libs/main/ARS.RED%26LIGMA%20UI%20LIB/source.lua"
+}).Body)()
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Loading library from local source
+
+If being used to be shared around, make sure you have a way of getting the library before trying to trying to load from a local source.
+
+local library = loadfile("path..to..library")
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Defining a window
+
+You must define a window before starting anything, without this you cannot access tabs, groups, etc.
+
+Size and position are taken as , if size or position are nil they will be set to their default size/position.
+
+local window = library:new_window(--[[name, size, position]])
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Options
+
+What all items parented by group take to control certain things they do.
+
+Defining options
+
+Every item has their own set of options, look in each item's options section to see what options they take.
+
+local item = library:new_item(--[[any params before options]],{
+    option: --[[bool/string/etc]],
+    option2: --[[you get it]] 
+})
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Accessing options
+
+Options are stored in the global environment. You can access this using multiple ways, getgenv is not required to access options in most cases.
+
+local option = getgenv().options["option"]
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Flags
+
+What certain items contain to store a value.
+
+Defining flags
+
+Not all items take a flag as a parameter.
+
+The only items that take a flag as a parameter are as follows:
+
+- Checkboxes
+- Sliders
+- Lists
+- Keybinds
+- Colorpickers
+
+local item = library:item_with_flag("flag", --[[any other parameters]])
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Accessing flags
+
+Flags are stored in the global environment (like options). You can access this using multiple ways, getgenv is not required to access flags in most cases.
+
+local flag = getgenv().flags["flag"]
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Tabs
+
+Tabs: Where everything originates from.
+
+Creating a tab
+
+Make sure you have defined a window before, or you won't be able to call this.
+
+local tab = window:new_tab("name_of_tab")
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Groups
+
+Groups: Where your buttons, sliders, dropdowns, etc are handled.
+
+Creating a group
+
+local group = tab:new_group("name_of_group", --[[right: true/false/nil]])
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Item
+
+What can be applied to any item.
+
+Items
+
+Anything under this category can be added to an item after creating it by calling a function returned by the item. All items (text, label, checkbox, list, slider, button) are supported by these.
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Colorpicker
+
+Allows you to add a colorpicker to any item.
+
+Creating a colorpicker
+
+You must call this after creating an item (textbox, label, checkbox, etc)
+
+local item_with_colorpicker = group:new_item(--[[params]])
+                              :add_colorpicker("flag", {options})
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Options
+
+Options for colorpickers
+
+Text
+
+The text that goes along with the colorpicker
+
+
+local item_with_colorpicker = group:new_item(--[[params]])
+                              :add_colorpicker("flag", {
+                                 text = "Example Colorpicker Text"
+                              })
+                              
+                              
+Default
+
+The default values that the color picker will be set to.
+
+This must be passed as a table.
+
+Color can only be represented as Color3.
+
+
+local item_with_colorpicker = group:new_item(--[[params]])
+                              :add_colorpicker("flag", {
+                                 default = {
+                                    color = Color3.fromRGB(1, 2, 3),
+                                    transparency = 0
+                                 }
+                              })
+                              
+                              
+Ignore
+
+Determines if the value that the colorpicker holds does NOT get saved to config and does NOT get loaded when configs are loaded.
+
+
+local item_with_colorpicker = group:new_item(--[[params]])
+                              :add_colorpicker("flag", {
+                                 text = "Example Colorpicker Text"
+                              })
+
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Keybind
+
+Allows you to add a keybind to any item.
+
+Creating a keybind
+
+You must call this after creating an item (textbox, label, checkbox, etc)
+
+
+local item_with_keybind = group:new_item(--[[params]])
+                          :add_keybind("flag", {options}) 
+                          
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Options
+
+Options for keybinds
+
+Default
+
+The default keybinding for the item it's attached to.
+
+All keybindings are handled through  you must pass them as such for default.
+
+
+local item_with_keybind = group:new_item(--[[params]])
+                          :add_keybind("flag", {
+                             default = Enum.KeyCode.End                       
+                          }) 
+                          
+                          
+Mode
+
+The mode that the keybind will hold, there are only 2 modes.
+
+The only existing modes are toggle and hold, these can be changed by the user later and saved to a config if the ignore option is not passed.
+
+
+local item_with_keybind = group:new_item(--[[params]])
+                          :add_keybind("flag", {
+                             mode = --[["Toggle" or "Hold"]]                       
+                          }) 
+                          
+                          
+State
+
+The default state of the keybind for the first time.
+
+
+local item_with_keybind = group:new_item(--[[params]])
+                          :add_keybind("flag", {
+                             state = --[[true/false/nil]]                       
+                          }) 
+                          
+                          
+Ignore
+
+Determines if the value that the keybinding holds does NOT get saved to config and does NOT get loaded when configs are loaded.
+
+
+local item_with_keybind = group:new_item(--[[params]])
+                          :add_keybind("flag", {
+                             ignore = --[[true/false/nil]]                       
+                          }) 
+                          
+                          
+Callback
+
+The function that will get called when the key is pressed that goes with the item it's keybound to.
+
+
+local item_with_keybind = group:new_item(--[[params]])
+                          :add_keybind("flag", {
+                             callback = function()
+                                print("keybind has been pressed")
+                             end                       
+                          }) 
+                          
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Textbox
+
+Textboxes: it's in the name.
+
+Creating a textbox
+
+local textbox = group:new_textbox("flag", { options })
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Text
+
+The text that is displayed on the text that gets created for the textbox.
+
+You are not required to pass this, if not passed it will use the flag you specified as the first argument for creating a new textbox.
+
+
+local textbox = group:new_textbox("flag", {
+    text = "Example Textbox Text"
+})
+
+
+Callback
+
+The function that gets called when the state of the textbox changes.
+
+This will only get called when the person presses the enter key inside of the textbox.
+
+
+local textbox = group:new_textbox("flag", {
+    callback = function(value)
+        print("textbox has been set to " .. value)
+    end
+})
+
+
+Default
+
+The default value to be inside of the textbox.
+
+local textbox = group:new_textbox("flag", {
+    default = "foobarbaz"
+})
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Label
+
+Labels: Text.
+
+Creating a label
+
+local label = group:new_label({ options })
+
+Options
+
+Options for labels.
+
+Text
+
+The text that is displayed on the label.
+
+
+local label = group:new_label({
+      text = "Example Label"
+})
+
+
+Unsafe
+
+Determines if the text should be shown in golden text to indicate that something that belongs to the label is "unsafe" or special in some sorts.
+
+
+local label = group:new_label({
+      text = "Unsafe Feature",
+      unsafe = true
+})
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Checkbox
+
+Checkbox: Self explanatory.
+
+Creating a checkbox
+
+local checkbox = library_local:new_checkbox("flag", { options })
+
+
+
+Options
+
+Options for checkboxes.
+
+Default
+
+The default value that belongs to the checkbox.
+
+
+local checkbox = group:new_checkbox("flag", {
+    default = false
+})
+
+
+Callback
+
+The function that gets called when the state of the checkbox changes.
+
+
+local checkbox = group:new_checkbox("flag", {
+    callback = function(state)
+      print("checkbox changed to " .. state)
+    end
+})
+
+
+Text
+
+The text that is displayed on the label that goes beside the checkbox.
+
+
+local checkbox = group:new_checkbox("flag", {
+      text = "Example Checkbox Text"
+})
+
+
+Unsafe
+
+Determines if the text should be shown in golden text to indicate that something that belongs to the checkbox is "unsafe" or special in some sorts.
+
+
+local checkbox = group:new_checkbox("flag", {
+      text = "Unsafe Feature",
+      unsafe = true
+})
+
+
+Ignore
+
+Determines if the value that gets stored by the checkbox does NOT get saved to config and does NOT get loaded when configs are loaded.
+
+
+local checkbox = group:new_checkbox("flag", {
+      ignore = false
+})
+
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+List
+
+Lists: Drop-downs that can contain multiple elements.
+
+Creating a list
+
+
+
+local list = group:new_list("flag", { options })
+
+
+
+Options
+
+Options for lists.
+
+Multi
+
+Determines if a list is multi-selective or not.
+
+Defining multi changes how a lot of options are defined within lists, look at the multi example for each option that contains it within lists.
+
+
+local list = group:new_list("flag", {
+    multi = true
+})
+
+
+Text
+
+The text that is displayed for the list.
+
+
+local list = group:new_list("flag", {
+    text = "Example List"
+})
+
+
+Values
+
+Specifies what values are inside of the list.
+
+
+local list = group:new_list("flag", {
+    values = {
+        "foo",
+        "bar",
+        "baz",
+    }
+})
+
+
+Callback
+
+The function that gets called when the state of the list changes.
+
+Depending if you define the multi option, the callback will return a table or a string.
+
+Non-multi:
+
+
+local list = group:new_list("flag", {
+    callback = function(value)
+      print("item " .. state .. " was selected in the list")
+    end
+})
+
+
+Multi:
+
+
+local list = group:new_list("flag", {
+    multi = true,
+    callback = function(value)
+      -- handle the table however you would like.
+    end
+})
+
+
+Default
+
+The default value to be selected inside of the list.
+
+Depending if you define the multi option, you must specify default as a string or a table.
+
+Non-multi:
+
+
+local list = group:new_list("flag", {
+    values = {
+        "foo",
+        "bar",
+        "baz",
+    },
+    default = "foo"
+})
+
+
+Multi:
+
+
+local list = group:new_list("flag", {
+    values = {
+        "foo",
+        "bar",
+        "baz",
+    },
+    multi = true,
+    default = {
+        "foo",
+    }
+})
+
+
+Ignore
+
+Determines if the value that gets stored by the slider does NOT get saved to config and does NOT get loaded when configs are loaded.
+
+
+local list = group:new_list("flag", {
+    ignore = true
+})
+
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Slider
+
+Sliders: Self explanatory.
+
+Creating a slider
+
+
+local slider = group:new_slider("flag", { options })
+
+
+
+Options
+
+Options for sliders.
+
+Default
+
+Specifies the default number for the slider.
+
+You are free to not pass this as an option, it will be interpreted as 0 if not passed.
+
+
+local slider = group:new_slider("flag", {
+    default = 10
+})
+
+
+Text
+
+The text that gets created alongside the slider.
+
+
+local slider = group:new_slider("flag", {
+    text = "Example Slider Text"
+})
+
+
+Unsafe
+
+Determines if the text should be shown in golden text to indicate that something that belongs to the label is "unsafe" or special in some sorts.
+
+
+local slider = group:new_slider("flag", {
+    text = "Unsafe Slider",
+    unsafe = true
+})
+
+
+Min & Max
+
+Defines the minimum and maximum values for the slider.
+
+This is a required option. This means that if you do not specify this option you will encounter an error.
+
+
+local slider = group:new_slider("flag", {
+    min = 0,
+    max = 1000
+})
+
+
+Decimals
+
+Defines how many decimals are represented in the number provided.
+
+This is a required option. This means that if you do not specify this option you will encounter an error. You are free to pass this as 0.
+
+
+local slider = group:new_slider("flag", {
+    default = 10.12345
+    decimals = 2
+})
+
+-- the slider will show 10.12345 rounded to how many decimals specified.
+
+
+
+Callback
+
+The function that gets called when the state of the slider changes.
+
+This will only get called when the user stops holding down their mouse button on the slider (setting the value).
+
+
+local slider = group:new_slider("flag", {
+    callback = function(value)
+        print("slider changed to " .. value)
+    end
+})
+
+
+Suffix
+
+Specifies the suffix of the number of the slider.
+
+
+local slider = group:new_slider("flag", {
+    text = "Distance Slider",
+    suffix = " studs",
+    min = 0,
+    min = 10
+})
+
+-- will show a slider that will display {number} studs
+
+
+Ignore
+
+Determines if the value that gets stored by the slider does NOT get saved to config and does NOT get loaded when configs are loaded.
+
+
+local slider = group:new_slider("flag", {
+    ignore = true
+})
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
