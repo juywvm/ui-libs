@@ -1,1 +1,41 @@
-dfdf
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/juywvm/ui-libs/main/Jans_Lib/source.lua"))()
+
+local Window = Library:CreateWindow("examplewow", Vector2.new(500, 300), Enum.KeyCode.RightShift)
+
+local EX11 = Window:CreateTab("EX1")
+
+local EX22 = Window:CreateTab("EX2")
+
+local EX33 = Window:CreateTab("EX3")
+
+local EX44 = Window:CreateTab("EX4")
+
+
+local testingwo1 = EX11:CreateSector("TEST LEFT", "left")
+local testingwo2 = EX11:CreateSector("TEST RIGHT", "right")
+local testingwo3 = EX11:CreateSector("TEST LEFT", "left")
+local testingwo4 = EX22:CreateSector("TEST LEFT", "left")
+local testingwo5 = EX22:CreateSector("TEST RIGHT", "right")
+
+
+local WalkSpeed = testingwo1:AddSlider("Speed", 16, 16, 300, 100, function(Value)
+    print(Value)
+end)
+
+testingwo1:AddButton('TEST', function()
+   	print("test")
+end)
+
+testingwo2:AddToggle('test', false, function(State)
+    print(State)
+end)
+
+testingwo2:AddColorpicker("test color", Color3.fromRGB(255,170,0), function(Color)
+    print(Color)
+end)
+
+testingwo3:AddButton('unload', function()
+   	game.CoreGui.examplewow:Destroy()
+end)
+
+testingwo3:AddLabel("test example by theycallmeBatus")
