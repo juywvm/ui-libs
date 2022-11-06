@@ -1,12 +1,11 @@
 --[[
 	rbimgui-2
-	version 1.0
+	version 1.2
 	by Singularity
         https://v3rmillion.net/member.php?action=profile&uid=947830
         Singularity#5490
 
-
-THIS IS A BACKUP, IM NOT TAKING ANY CREDITS. ORIGINAL FROM: https://raw.githubusercontent.com/Singularity5490/rbimgui-2/main/rbimgui-2.lua
+THIS IS A BACKUP, DONT TAKING ANYCREDITS, ORIGINAL FROM: https://raw.githubusercontent.com/Singularity5490/rbimgui-2/main/rbimgui-2.lua
 --]]
 
 repeat wait() until game:GetService("Players").LocalPlayer
@@ -1504,12 +1503,23 @@ local library library = {
 
                     labelOptions = settings.new({
                         text = "New Label",
+                        color = Color3.new(1, 1, 1),
                     }).handle(labelOptions)
 
                     local label = new("Label")
                     label.Parent = items
                     label.Text = labelOptions.text
                     label.Size = UDim2.new(0, label.TextBounds.X, 0, label.Size.Y.Offset)
+                    label.TextColor3 = labelOptions.color
+
+                    function self.setText(text)
+                        label.Text = text
+                        label.Size = UDim2.new(0, label.TextBounds.X, 0, label.Size.Y.Offset)
+                    end
+
+                    function self.setColor(color)
+                        label.TextColor3 = color
+                    end
 
                     function self:Destroy()
                         label:Destroy()
@@ -1521,6 +1531,7 @@ local library library = {
 
                 function types.button(buttonOptions)
                     local self = { }
+                    self.eventBlock = false
 
                     buttonOptions = settings.new({
                         text = "New Button",
@@ -1533,7 +1544,9 @@ local library library = {
                     button.Text = buttonOptions.text
                     button.Size = UDim2.new(0, button.TextBounds.X + 20, 0, 20)
                     button.MouseButton1Click:Connect(function()
-                        self.event:Fire()
+                        if not self.eventBlock then
+                            self.event:Fire()
+                        end
                     end)
 
                     local ImageLabel = button:FindFirstChild("ImageLabel")
@@ -1575,6 +1588,7 @@ local library library = {
                         animation = options.animation,
                     }).handle(switchOptions)
                     self.on = switchOptions.on
+                    self.eventBlock = false
 
                     local switch = new("Switch")
                     switch.Parent = items
@@ -1607,7 +1621,9 @@ local library library = {
                         if (not not boolean) == self.on then return end
                         self.on = not not boolean
                         resize(check, { ImageTransparency = self.on and 0 or 1 }, switchOptions.animation)
-                        self.event:Fire(self.on)
+                        if not self.eventBlock then
+                            self.event:Fire(self.on)
+                        end
                     end
 
                     function self.setColor(color)
@@ -1638,12 +1654,14 @@ local library library = {
                         min = 0,
                         max = 100,
                         value = 0,
-                        color = Color3.fromRGB(32, 59, 97),
+                        color = options.color,
+                        barcolor = bleach(options.color),
                         rounding = options.rounding,
                         animation = options.animation,
                     }).handle(sliderOptions)
                     self.value = sliderOptions.value
                     self.event = event.new()
+                    self.eventBlock = false
 
                     local function round(x, n)
                         local a = tostring(x * 10^n)
@@ -1663,7 +1681,7 @@ local library library = {
                     outer.SliceScale = sliderOptions.rounding / 100
                     inner.SliceScale = sliderOptions.rounding / 100
                     inner.ImageColor3 = sliderOptions.color
-                    _slider.BackgroundColor3 = bleach(sliderOptions.color)
+                    _slider.BackgroundColor3 = sliderOptions.barcolor
 
                     function self.setColor(color)
                         inner.ImageColor3 = color
@@ -1700,7 +1718,9 @@ local library library = {
                         end
                         self.value = n
                         if self.value ~= old then
-                            self.event:Fire(self.value)
+                            if not self.eventBlock then
+                                self.event:Fire(self.value)
+                            end
                         end
                         old = self.value
                         value.Text = round(self.value, 2)
@@ -1752,6 +1772,7 @@ local library library = {
                     self.event = event.new()
                     self.isopen = true
                     self.visible = false
+                    self.eventBlock = false
 
                     colorOptions = settings.new({
                         text = "New Color Picker",
@@ -1859,7 +1880,9 @@ local library library = {
                             content:FindFirstChild("SaturationColor").ImageColor3 = Color3.fromHSV(0, 0, v)
                             local v2 = v < 0.5 and 1 or 0
                             ImageLabel:FindFirstChild("ImageLabel").ImageColor3 = Color3.fromHSV(0, 0, v2)
-                            self.event:Fire(color)
+                            if not self.eventBlock then
+                                self.event:Fire(color)
+                            end
                         end
 
                         local Entered1, Entered2 = false, false
@@ -1962,6 +1985,7 @@ local library library = {
                     self.visible = false
                     self.selected = nil
                     self.event = event.new()
+                    self.eventBlock = false
 
                     dropdownOptions = settings.new({
                         text = "New Dropdown",
@@ -2084,7 +2108,9 @@ local library library = {
                             resize(dropdownOption:GetChildren()[1], { ImageColor3 = dropdownOptions.selectioncolor }, 0.1)
                             inner:FindFirstChild("Value").Text = string.format("[ %s ]", name)
                             dropdownWindow:FindFirstChild("Content"):FindFirstChild("Selected").Text = string.format("[ %s ]", name)
-                            self.event:Fire(name)
+                            if not self.eventBlock then
+                                self.event:Fire(name)
+                            end
                         end
 
                         function dropdownObject.Destroy()
