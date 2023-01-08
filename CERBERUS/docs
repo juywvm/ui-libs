@@ -1,4 +1,4 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Jxereas/UI-Libraries/main/cerberus.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/juywvm/ui-libs/main/CERBERUS/source.lua"))()
 
 local window = Library.new("Window") -- Args(<string> Name, <boolean?> ConstrainToScreen)
 
